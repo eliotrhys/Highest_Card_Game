@@ -8,10 +8,14 @@ public class DeckTest {
     Deck testDeck;
     Card testCard;
     Card testCard2;
+    Player testPlayer;
+    Dealer testDealer;
 
     @Before
     public void before(){
         testDeck = new Deck();
+        testPlayer = new Player("Johnny");
+        testDealer = new Dealer("Badguy");
         testCard = new Card(SuitType.HEARTS, CardTypes.EIGHT);
         testCard2 = new Card(SuitType.HEARTS, CardTypes.ACE);
     }
@@ -39,18 +43,19 @@ public class DeckTest {
     }
 
     @Test
-    public void canShuffleDeck(){
-        testDeck.populateDeck();
-        Card variable = testDeck.shuffleDeck();
-        assertNotEquals(variable.getSuitFromEnum(), testCard2.getSuitFromEnum());
-    }
-
-    @Test
     public void shuffleDefoWorks(){
         testDeck.populateDeck();
         Card variable = testDeck.takeFirstCard();
         assertEquals(variable.getValueFromEnum(), testCard2.getValueFromEnum());
         assertEquals(variable.getSuitFromEnum(), testCard2.getSuitFromEnum());
+    }
+
+    @Test
+    public void dealWorks(){
+        testDeck.populateDeck();
+        testDeck.dealCards(testPlayer, testDealer);
+        assertEquals(1, testPlayer.getHandCount());
+        assertEquals(1, testDealer.getHandCount());
     }
 
 

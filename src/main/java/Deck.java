@@ -30,9 +30,16 @@ public class Deck {
         return allCards.get(0);
     }
 
-    public Card shuffleDeck(){
+    public ArrayList<Card> shuffleDeck(){
         Collections.shuffle(allCards);
-        return allCards.get(0);
+        return allCards;
+    }
+
+    public void dealCards(Player player, Dealer dealer){
+        Card playerHand = allCards.get(0);
+        player.getHand().add(playerHand);
+        Card dealerHand = allCards.get(1);
+        dealer.getHand().add(dealerHand);
     }
 
 }
